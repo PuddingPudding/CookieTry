@@ -7,63 +7,21 @@ import Browser = Laya.Browser;
 import WebGL = Laya.WebGL;
 import UI = laya.ui;
 import Handler = Laya.Handler;
-
-module Cookie 
-{
-    export function read(name: string) :string
-    {
-        var result = new RegExp('(?:^|; )(' + encodeURIComponent(name) + ')=([^;]*)').exec(document.cookie);
-        console.log(result);
-        console.log(decodeURIComponent(result[1]));
-        return result ? decodeURIComponent(result[2]) : null;
-    }
-    
-    export function write(name: string, value: string, days?: number) : void
-    {
-        if (!days) 
-        {
-            document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
-            //這裡有個方法叫做Laya.Browser.window.document.cookie，據說效果跟document.cookie相似
-            console.log(name + "=" + value);
-            console.log(document.cookie); //看全部的cookie
-            console.log(Cookie.read(name));//看該name對應到的cookie
-        }
-        else
-        {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            
-            var expires = "; expires=" + date.toUTCString(); //將日期轉為GMT格林威治標準時間
-            document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
-            // document.cookie = name + "=" + value;
-            console.log(name + "=" + value + expires + "; path=/");
-            console.log(document.cookie);
-            console.log(Cookie.read(name));
-        }     
-        ///////////////以上的方法為對cookie進行操作，然而目前這個方法似乎無法使用，因為chrome無法單純在本地端進行cookie操作的樣子
-        // Laya.LocalStorage.setItem(name , value)
-        // console.log(name + "=" + value);
-        // console.log(document.cookie);
-        // console.log(Cookie.read(name));
-    }
-    
-    export function remove(name: string) : void
-    {
-        console.log(name);
-        console.log(document.cookie);
-        write(name, "", -1);
-        console.log(document.cookie);
-    }	
-}
+// import {CookieManager} from './CookieManager';
+// import {IDataManager} from './IDataManager';
 
 class CookieTry
 {    
+    private m_cookieManager:IDataManager;
     private btnSkinA : string  =  "img/button.png" ; //預先加載按鈕圖片
     // private btnSkinB : string  =  "../res/img/button.png" ; //預先加載按鈕圖片
     constructor()
     {
-        // 不支持WebGL时自动切换至Canvas
+            // 不支持WebGL时自动切换至Canvas
             Laya.init(Browser.clientWidth, Browser.clientHeight, WebGL);
+            
+            console.log("CookieTryGoInTo");
+            this.m_cookieManager = new CookieManager();
 
             Laya.stage.alignV = Stage.ALIGN_TOP;
             Laya.stage.alignH = Stage.ALIGN_CENTER;
@@ -167,25 +125,25 @@ class CookieTry
     {
         if(inputValue != null)
         {
-            Cookie.write(inputText.text , inputValue.text , 0.025);
+            this.m_cookieManager.Write(inputText.text , inputValue.text , 0.025);
         }
         else
         {
-            Cookie.write(inputText.text , "banana" , 0.025);
+            this.m_cookieManager.Write(inputText.text , "banana" , 0.025);
         }        
     }
     private DeleteCookie(inputText:Laya.Input):void
     {
-        Cookie.remove(inputText.text);
+        this.m_cookieManager.Remove(inputText.text);
     }
     private GetCookie(inputText:Laya.Input):String
     {
-        return Cookie.read(inputText.text);
+        return this.m_cookieManager.Read(inputText.text);
     }
     private OutputCookie(inputText:Laya.Input , outputText:Laya.Text):void
     {
-        outputText.text = Cookie.read(inputText.text);
+        outputText.text = this.m_cookieManager.Read(inputText.text);
     }
 }
+new CookieTry();
 
-new CookieTry;

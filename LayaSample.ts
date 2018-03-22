@@ -3,6 +3,7 @@ class GameMain{
     constructor()
     {
         Laya.init(600,400);
+        new CookieTry();
     }
 }
 new GameMain();

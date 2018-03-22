@@ -7,11 +7,12 @@ import Browser = Laya.Browser;
 import WebGL = Laya.WebGL;
 import UI = laya.ui;
 import Handler = Laya.Handler;
-// import {CookieManager} from './CookieManager';
-// import {IDataManager} from './IDataManager';
+import CookieManager = DataManager.CookieManager;
+import IDataManager = DataManager.IDataManager;
 
 class CookieTry
-{    
+{
+
     private m_cookieManager:IDataManager;
     private btnSkinA : string  =  "img/button.png" ; //預先加載按鈕圖片
     // private btnSkinB : string  =  "../res/img/button.png" ; //預先加載按鈕圖片
@@ -44,8 +45,8 @@ class CookieTry
 
         var textCheckingCookie: Laya.Text = new Laya.Text();
         textCheckingCookie.text = "餅乾測試";
-        textCheckingCookie.fontSize = 75;
-        textCheckingCookie.pos(500, 500);
+        textCheckingCookie.fontSize = 50;
+        textCheckingCookie.pos(100  , 100);
 
         var cookieInputBar: Laya.Input = new Laya.Input();
         cookieInputBar.borderColor = "#000000";
@@ -145,5 +146,3 @@ class CookieTry
         outputText.text = this.m_cookieManager.Read(inputText.text);
     }
 }
-new CookieTry();
-

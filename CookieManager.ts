@@ -9,11 +9,12 @@ module DataManager
     // class CookieManager implements IDataManager
     {
         m_nDefaultExistDays:number;
+        private static g_singleton:CookieManager;
         constructor()
         {
             console.log("Successfully construct CookieManager");
             this.m_nDefaultExistDays = 1;
-        }    
+        }
         public Read(_sKey:string):string //帶入key值以求得對應的資料
         {
             let sOutputValue:string = "";

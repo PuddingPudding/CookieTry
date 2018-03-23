@@ -9,6 +9,7 @@ import UI = laya.ui;
 import Handler = Laya.Handler;
 import CookieManager = DataManager.CookieManager;
 import IDataManager = DataManager.IDataManager;
+import GoogleManager = DataManager.GoogleManager;
 
 class CookieTry
 {
@@ -86,32 +87,53 @@ class CookieTry
         checkButton.pos(deleteButton.x , deleteButton.y + deleteButton.height + 5);
         checkButton.clickHandler = new Handler(this, this.OutputCookie, [cookieInputBar,textCheckingCookie]);
 
-        if(1)
-        {
-            console.log("1為true");
-        }
-        else
-        {
-            console.log("1為false");
-        }
+        // if(1)
+        // {
+        //     console.log("1為true");
+        // }
+        // else
+        // {
+        //     console.log("1為false");
+        // }
 
-        if(0)
-        {
-            console.log("0為true");
-        }
-        else
-        {
-            console.log("0為false");
-        }
+        // if(0)
+        // {
+        //     console.log("0為true");
+        // }
+        // else
+        // {
+        //     console.log("0為false");
+        // }
 
-        if(-1)
-        {
-            console.log("-1為true");
-        }
-        else
-        {
-            console.log("-1為false");
-        }
+        // if(-1)
+        // {
+        //     console.log("-1為true");
+        // }
+        // else
+        // {
+        //     console.log("-1為false");
+        // }
+        
+        // in HTML: <head id="my-document-head">
+        // let aHead = document.head;
+        
+        // let googleClient:HTMLMetaElement = document.createElement("meta");
+        // googleClient.name = "google-signin-client_id";
+        // googleClient.content = "224880618061-mg2kf12elebto581h9ssci52kc1v412b.apps.googleusercontent.com";
+        
+        // console.log(aHead.childElementCount); // "my-document-head";
+        // aHead.appendChild(googleClient);
+        // console.log(aHead.childElementCount); // "my-document-head";
+        // console.log(aHead.innerHTML);
+        // console.log(googleClient);
+
+        console.log(document.head.childElementCount);
+        let m_googleManager:IDataManager = new GoogleManager();
+        console.log(document.head.childElementCount);
+        console.log(document.head.innerHTML);
+        let m_googleManager2:IDataManager = new GoogleManager();
+        console.log(document.head.childElementCount);
+        console.log(document.head.innerHTML);
 
         Laya.stage.addChild(textCookieName);
         Laya.stage.addChild(textCookieValue);

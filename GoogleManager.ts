@@ -8,6 +8,8 @@ module DataManager
 		m_nDefaultExistDays:number; //預設的資料存活時間
 		private static g_googleClient:HTMLMetaElement = document.createElement("meta");
 		private static g_googlePlatform:HTMLScriptElement = document.createElement("script");
+		private static g_googleClientID:string = "224880618061-mg2kf12elebto581h9ssci52kc1v412b.apps.googleusercontent.com";
+
         Read(_sKey:string):string //帶入key值以求得對應的資料
 		{
 			let sOutputValue:string = "";
@@ -23,10 +25,20 @@ module DataManager
 		}
 		constructor() 
 		{
+			// gapi.load('auth2', () => 
+			// {
+			//     gapi.auth2.init
+			//     ({
+			//     client_id: GoogleManager.g_googleClientID,
+			//     cookiepolicy: 'single_host_origin',
+			//     scope: 'profile email'
+			//     });
+			// });//事前載入gapi中的auth2函式
+
 			if(!document.head.contains(GoogleManager.g_googleClient) )
 			{
 				GoogleManager.g_googleClient.name = "google-signin-client_id";
-				GoogleManager.g_googleClient.content = "224880618061-mg2kf12elebto581h9ssci52kc1v412b.apps.googleusercontent.com";
+				GoogleManager.g_googleClient.content = GoogleManager.g_googleClientID;
 				document.head.appendChild(GoogleManager.g_googleClient);
 			}
 						

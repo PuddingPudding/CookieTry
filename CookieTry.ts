@@ -96,24 +96,24 @@ class CookieTry
         googleClient.name = "google-signin-client_id";
         googleClient.content = "224880618061-mg2kf12elebto581h9ssci52kc1v412b.apps.googleusercontent.com";
         
-        console.log(aHead.childElementCount); // "my-document-head";
-        aHead.appendChild(googleClient);
-        console.log(aHead.childElementCount); // "my-document-head";
-        console.log(aHead.innerHTML);
-        console.log(googleClient);
-        let m_googlePlatform:HTMLScriptElement = document.createElement("script");
-        m_googlePlatform.src = "https://apis.google.com/js/platform.js";
-        m_googlePlatform.async = true;
-        m_googlePlatform.defer = true;
-        aHead.appendChild(m_googlePlatform);
+        // console.log(aHead.childElementCount); // "my-document-head";
+        // aHead.appendChild(googleClient);
+        // console.log(aHead.childElementCount); // "my-document-head";
+        // console.log(aHead.innerHTML);
+        // console.log(googleClient);
+        // let m_googlePlatform:HTMLScriptElement = document.createElement("script");
+        // m_googlePlatform.src = "https://apis.google.com/js/platform.js";
+        // m_googlePlatform.async = true;
+        // m_googlePlatform.defer = true;
+        // aHead.appendChild(m_googlePlatform);
 
-        // console.log("原本的<head>中有" + document.head.childElementCount + "個元素");
-        // let m_googleManager:IDataManager = new GoogleManager();
-        // console.log("加入第一個googleManager後有" + document.head.childElementCount + "個元素");
-        // console.log(document.head.innerHTML);
-        // let m_googleManager2:IDataManager = new GoogleManager();
-        // console.log("加入第二個googleManager後有" + document.head.childElementCount + "個元素");
-        // console.log(document.head.innerHTML);
+        console.log("原本的<head>中有" + document.head.childElementCount + "個元素");
+        let m_googleManager:IDataManager = new GoogleManager();
+        console.log("加入第一個googleManager後有" + document.head.childElementCount + "個元素");
+        console.log(document.head.innerHTML);
+        let m_googleManager2:IDataManager = new GoogleManager();
+        console.log("加入第二個googleManager後有" + document.head.childElementCount + "個元素");
+        console.log(document.head.innerHTML);
 
         let m_btnGoogleLogin: Laya.Button = new Laya.Button(this.btnSkinA);
         m_btnGoogleLogin.height = 25;

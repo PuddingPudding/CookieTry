@@ -10,11 +10,12 @@ import Handler = Laya.Handler;
 import CookieManager = DataManager.CookieManager;
 import IDataManager = DataManager.IDataManager;
 import GoogleManager = DataManager.GoogleManager;
-declare const gapi: any; //聲明未來將會有個叫做gapi的東西，這玩意兒需要在執行後html引入googleAPI後才會產生，編寫階段typescript並不了解
+// import gapi = DataManager.gapi;
 
 class CookieTry
 {
     private m_cookieManager:IDataManager;
+    private m_googleManager:IDataManager;
     private btnSkinA : string  =  "img/button.png" ; //預先加載按鈕圖片
     // private btnSkinB : string  =  "../res/img/button.png" ; //預先加載按鈕圖片
     public auth2: any;
@@ -26,6 +27,7 @@ class CookieTry
             
             console.log("CookieTryGoInTo");
             this.m_cookieManager = new CookieManager();
+            this.m_googleManager = new GoogleManager();
 
             Laya.stage.alignV = Stage.ALIGN_TOP;
             Laya.stage.alignH = Stage.ALIGN_CENTER;
@@ -88,32 +90,6 @@ class CookieTry
         checkButton.labelSize = 10;
         checkButton.pos(deleteButton.x , deleteButton.y + deleteButton.height + 5);
         checkButton.clickHandler = new Handler(this, this.OutputCookie, [cookieInputBar,textCheckingCookie]);
-        
-        //in HTML: <head id="my-document-head">
-        let aHead = document.head;
-        
-        let googleClient:HTMLMetaElement = document.createElement("meta");
-        googleClient.name = "google-signin-client_id";
-        googleClient.content = "224880618061-mg2kf12elebto581h9ssci52kc1v412b.apps.googleusercontent.com";
-        
-        // console.log(aHead.childElementCount); // "my-document-head";
-        // aHead.appendChild(googleClient);
-        // console.log(aHead.childElementCount); // "my-document-head";
-        // console.log(aHead.innerHTML);
-        // console.log(googleClient);
-        // let m_googlePlatform:HTMLScriptElement = document.createElement("script");
-        // m_googlePlatform.src = "https://apis.google.com/js/platform.js";
-        // m_googlePlatform.async = true;
-        // m_googlePlatform.defer = true;
-        // aHead.appendChild(m_googlePlatform);
-
-        console.log("原本的<head>中有" + document.head.childElementCount + "個元素");
-        let m_googleManager:IDataManager = new GoogleManager();
-        console.log("加入第一個googleManager後有" + document.head.childElementCount + "個元素");
-        console.log(document.head.innerHTML);
-        let m_googleManager2:IDataManager = new GoogleManager();
-        console.log("加入第二個googleManager後有" + document.head.childElementCount + "個元素");
-        console.log(document.head.innerHTML);
 
         let m_btnGoogleLogin: Laya.Button = new Laya.Button(this.btnSkinA);
         m_btnGoogleLogin.height = 25;
@@ -122,8 +98,6 @@ class CookieTry
         m_btnGoogleLogin.labelSize = 10;
         m_btnGoogleLogin.pos(checkButton.x , checkButton.y + checkButton.height + 5);
         m_btnGoogleLogin.clickHandler = new Handler(this, this.GoogleLogin,[m_btnGoogleLogin]);
-
-        document.body.appendChild
 
         Laya.stage.addChild(textCookieName);
         Laya.stage.addChild(textCookieValue);
@@ -160,29 +134,6 @@ class CookieTry
     }
     private GoogleLogin(_loginBtn:Laya.Button):void
     {
-        gapi.load('auth2', () => 
-        {
-            this.auth2 = gapi.auth2.init
-            ({
-                client_id: '224880618061-mg2kf12elebto581h9ssci52kc1v412b.apps.googleusercontent.com',
-                cookiepolicy: 'single_host_origin',
-                scope: 'profile email'
-            });
-        });
-        // console.log(typeof(this.auth2));
-        // this.auth2.attachClickHandler(_loginBtn, {},
-        // (googleUser) => {
-        //     let profile = googleUser.getBasicProfile();
-        //     console.log('Token || ' + googleUser.getAuthResponse().id_token);
-        //     console.log('ID: ' + profile.getId());
-        //     console.log('Name: ' + profile.getName());
-        //     console.log('Image URL: ' + profile.getImageUrl());
-        //     console.log('Email: ' + profile.getEmail());
-        //     //YOUR CODE HERE
-
-        // }, (error) => {
-        //     alert(JSON.stringify(error, undefined, 2));
-        // });
-        
+        this.m_googleManager.SignIn();
     }
 }

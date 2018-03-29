@@ -15,6 +15,10 @@ module DataManager
             console.log("Successfully construct CookieManager");
             this.m_nDefaultExistDays = 1;
         }
+        SignIn():void
+        {
+            
+        }
         public Read(_sKey:string):string //帶入key值以求得對應的資料
         {
             let sOutputValue:string = "";

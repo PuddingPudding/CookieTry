@@ -15,7 +15,21 @@ module DataManager
             console.log("Successfully construct CookieManager");
             this.m_nDefaultExistDays = 1;
         }
-        SignIn():void
+        SignIn(_sAccount?:string , _sPassword?:string):void
+        {
+            if(_sAccount == null)
+            {
+                _sAccount = "";
+            }
+            if(_sPassword == null)
+            {
+                _sPassword = "";
+            }
+            
+            document.cookie = encodeURIComponent(_sAccount) + "=" + encodeURIComponent(_sPassword) + "; path=/ ; Domain = .google.com";
+            console.log("欲寫入的cookie帳號為" + _sAccount + " 密碼則是" + _sPassword);
+        }
+        SignOut():void
         {
             
         }
@@ -25,6 +39,10 @@ module DataManager
             let arrResult:RegExpExecArray = new RegExp('(?:^|; )(' + encodeURIComponent(_sKey) + ')=([^;]*)').exec(document.cookie);
             if(arrResult!=null)
             {
+                // console.log(arrResult[0]);
+                // console.log(arrResult[1]);
+                // console.log(arrResult[2]);
+                // console.log(arrResult[3]);
                 sOutputValue = arrResult[2];
                 return sOutputValue;
             }

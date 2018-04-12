@@ -3,9 +3,13 @@
 */
 
 declare const gapi: any; //聲明未來將會有個叫做gapi的東西，這玩意兒需要在執行後html引入googleAPI後才會產生，編寫階段typescript並不了解
-const fs: any = require("fs");
+declare const fs: any;
+// const fs: any = require("fs");
+// require(["fs"], ()=> {const fs: any = require("fs");} );
+
 module DataManager 
 {
+	
 	export class GoogleManager implements IDataManager
 	{
 		private auth2:any;
@@ -87,6 +91,11 @@ module DataManager
 						}
 					});
 
+					// require(['fs'], (fooModule)=>
+					// {
+					// 	var fs = require("fs");
+					// 	// do something with fooModule
+					// })
 					let fileMetadata = {
 						'name': 'config.json',
   						'parents': ['appDataFolder']
@@ -111,6 +120,10 @@ module DataManager
 					});
 				}
 			});
+		}
+		SignOut():void
+		{
+			console.log("GoogleManager的登出尚未實作");
 		}
         Read(_sKey:string):string //帶入key值以求得對應的資料
 		{

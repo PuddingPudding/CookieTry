@@ -27,7 +27,7 @@ class CookieTry
             
             console.log("CookieTryGoInTo");
             this.m_cookieManager = new CookieManager();
-            this.m_googleManager = new GoogleManager();
+            // this.m_googleManager = new GoogleManager();
 
             Laya.stage.alignV = Stage.ALIGN_TOP;
             Laya.stage.alignH = Stage.ALIGN_CENTER;
@@ -99,6 +99,14 @@ class CookieTry
         m_btnGoogleLogin.pos(checkButton.x , checkButton.y + checkButton.height + 5);
         m_btnGoogleLogin.clickHandler = new Handler(this, this.GoogleLogin,[m_btnGoogleLogin]);
 
+        let m_btnCookieLogin: Laya.Button = new Laya.Button(this.btnSkinA);
+        m_btnCookieLogin.height = 25;
+        m_btnCookieLogin.width = 150;
+        m_btnCookieLogin.label = "Cookie登入";
+        m_btnCookieLogin.labelSize = 10;
+        m_btnCookieLogin.pos(checkButton.x , checkButton.y + checkButton.height + 5 + 30);
+        m_btnCookieLogin.clickHandler = new Handler(this, this.CookieLogin,[cookieInputBar , cookieValueInputBar]);
+
         Laya.stage.addChild(textCookieName);
         Laya.stage.addChild(textCookieValue);
         Laya.stage.addChild(cookieInputBar);
@@ -108,6 +116,7 @@ class CookieTry
         Laya.stage.addChild(textCheckingCookie);
         Laya.stage.addChild(checkButton);
         Laya.stage.addChild(m_btnGoogleLogin);
+        Laya.stage.addChild(m_btnCookieLogin);
     }
     private AddCookie(inputText:Laya.Input , inputValue?:Laya.Input): void
     {
@@ -135,5 +144,9 @@ class CookieTry
     private GoogleLogin(_loginBtn:Laya.Button):void
     {
         this.m_googleManager.SignIn();
+    }
+    private CookieLogin(_inputText:Laya.Input , _inputValue:Laya.Input):void
+    {
+        this.m_cookieManager.SignIn(_inputText.text , _inputValue.text);
     }
 }

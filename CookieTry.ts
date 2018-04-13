@@ -107,6 +107,13 @@ class CookieTry
         m_btnCookieLogin.pos(checkButton.x , checkButton.y + checkButton.height + 5 + 30);
         m_btnCookieLogin.clickHandler = new Handler(this, this.CookieLogin,[cookieInputBar , cookieValueInputBar]);
 
+        let m_btnFBLogin: Laya.Button = new Laya.Button(this.btnSkinA);
+        m_btnFBLogin.height = 25;
+        m_btnFBLogin.width = 150;
+        m_btnFBLogin.label = "Facebook登入";
+        m_btnFBLogin.labelSize = 10;
+        m_btnFBLogin.pos(checkButton.x , checkButton.y + checkButton.height + 5 + 60);
+
         Laya.stage.addChild(textCookieName);
         Laya.stage.addChild(textCookieValue);
         Laya.stage.addChild(cookieInputBar);
@@ -117,6 +124,7 @@ class CookieTry
         Laya.stage.addChild(checkButton);
         Laya.stage.addChild(m_btnGoogleLogin);
         Laya.stage.addChild(m_btnCookieLogin);
+        Laya.stage.addChild(m_btnFBLogin);
     }
     private AddCookie(inputText:Laya.Input , inputValue?:Laya.Input): void
     {

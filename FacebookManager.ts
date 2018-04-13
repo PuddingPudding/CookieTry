@@ -9,7 +9,7 @@ module DataManager
 	{
 		constructor()
 		{
-			// window = function() {
+			// window.fbAsyncInit = ()=> {
 			// 	FB.init({
 			// 	appId            : 'your-app-id',
 			// 	autoLogAppEvents : true,

@@ -10,12 +10,14 @@ import Handler = Laya.Handler;
 import CookieManager = DataManager.CookieManager;
 import IDataManager = DataManager.IDataManager;
 import GoogleManager = DataManager.GoogleManager;
+import FacebookManager = DataManager.FacebookManager;
 // import gapi = DataManager.gapi;
 
 class CookieTry
 {
     private m_cookieManager:IDataManager;
     private m_googleManager:IDataManager;
+    private m_facebookManager:IDataManager;
     private btnSkinA : string  =  "img/button.png" ; //預先加載按鈕圖片
     // private btnSkinB : string  =  "../res/img/button.png" ; //預先加載按鈕圖片
     public auth2: any;
@@ -28,6 +30,7 @@ class CookieTry
             console.log("CookieTryGoInTo");
             this.m_cookieManager = new CookieManager();
             // this.m_googleManager = new GoogleManager();
+            this.m_facebookManager = new FacebookManager();
 
             Laya.stage.alignV = Stage.ALIGN_TOP;
             Laya.stage.alignH = Stage.ALIGN_CENTER;
@@ -113,6 +116,7 @@ class CookieTry
         m_btnFBLogin.label = "Facebook登入";
         m_btnFBLogin.labelSize = 10;
         m_btnFBLogin.pos(checkButton.x , checkButton.y + checkButton.height + 5 + 60);
+        m_btnFBLogin.clickHandler = new Handler(this,this.FacebookLogin);
 
         Laya.stage.addChild(textCookieName);
         Laya.stage.addChild(textCookieValue);
@@ -156,5 +160,9 @@ class CookieTry
     private CookieLogin(_inputText:Laya.Input , _inputValue:Laya.Input):void
     {
         this.m_cookieManager.SignIn(_inputText.text , _inputValue.text);
+    }
+    private FacebookLogin():void
+    {
+        this.m_facebookManager.SignIn();
     }
 }

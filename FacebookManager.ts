@@ -55,7 +55,7 @@ module DataManager
             })(document, 'script', 'facebook-jssdk');
 		}
 
-		private statusChangeCallback(response:any):any
+		private statusChangeCallback(response:any):void
 		{
 				console.log('statusChangeCallback');
                 console.log(response);
@@ -75,7 +75,7 @@ module DataManager
                 }
 		}
 
-		private testAPI():any
+		private testAPI():void
 		{
 			console.log('Welcome!  Fetching your information.... ');
 			FB.api('/me', (response) => {
@@ -84,7 +84,7 @@ module DataManager
 			});
 		}
 
-		private checkLoginState():any
+		private checkLoginState():void
 		{
 			console.log("登入進來");
 			FB.getLoginStatus((response) => {
@@ -130,7 +130,12 @@ module DataManager
 
 		Repost(_url:string):void
 		{
-
+			FB.ui({
+				method: 'share',
+				mobile_iframe: true,
+				href: _url,
+				quote:"肥宅打quote" //分享時會額外多加文字，這行文字使用者只能決定要不要留，無法編輯
+			}, function (response) { });
 		}
 	}
 }

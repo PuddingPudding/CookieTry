@@ -11,6 +11,7 @@ import CookieManager = DataManager.CookieManager;
 import IDataManager = DataManager.IDataManager;
 import GoogleManager = DataManager.GoogleManager;
 import FacebookManager = DataManager.FacebookManager;
+import IDataReposter = DataManager.IDataReposter;
 // import gapi = DataManager.gapi;
 
 class CookieTry
@@ -18,6 +19,7 @@ class CookieTry
     private m_cookieManager:IDataManager;
     private m_googleManager:IDataManager;
     private m_facebookManager:IDataManager;
+    private m_facebookRepost:IDataReposter;
     private btnSkinA : string  =  "img/button.png" ; //預先加載按鈕圖片
     // private btnSkinB : string  =  "../res/img/button.png" ; //預先加載按鈕圖片
     public auth2: any;
@@ -31,6 +33,7 @@ class CookieTry
             this.m_cookieManager = new CookieManager();
             // this.m_googleManager = new GoogleManager();
             this.m_facebookManager = new FacebookManager();
+            this.m_facebookRepost = new FacebookManager();
 
             Laya.stage.alignV = Stage.ALIGN_TOP;
             Laya.stage.alignH = Stage.ALIGN_CENTER;
@@ -118,6 +121,14 @@ class CookieTry
         m_btnFBLogin.pos(checkButton.x , checkButton.y + checkButton.height + 5 + 60);
         m_btnFBLogin.clickHandler = new Handler(this,this.FacebookLogin);
 
+        let m_btnFBRepost: Laya.Button = new Laya.Button(this.btnSkinA);
+        m_btnFBRepost.height = 25;
+        m_btnFBRepost.width = 150;
+        m_btnFBRepost.label = "Facebook分享";
+        m_btnFBRepost.labelSize = 10;
+        m_btnFBRepost.pos(checkButton.x , checkButton.y + checkButton.height + 5 + 90);
+        m_btnFBRepost.clickHandler = new Handler(this, this.FacebookRepost , [cookieInputBar]);
+
         Laya.stage.addChild(textCookieName);
         Laya.stage.addChild(textCookieValue);
         Laya.stage.addChild(cookieInputBar);
@@ -129,6 +140,7 @@ class CookieTry
         Laya.stage.addChild(m_btnGoogleLogin);
         Laya.stage.addChild(m_btnCookieLogin);
         Laya.stage.addChild(m_btnFBLogin);
+        Laya.stage.addChild(m_btnFBRepost);
     }
     private AddCookie(inputText:Laya.Input , inputValue?:Laya.Input): void
     {
@@ -164,5 +176,10 @@ class CookieTry
     private FacebookLogin():void
     {
         this.m_facebookManager.SignIn();
+    }
+    private FacebookRepost(_inputText:Laya.Input):void
+    {
+        console.log(_inputText.text);
+        this.m_facebookRepost.Repost(_inputText.text);
     }
 }

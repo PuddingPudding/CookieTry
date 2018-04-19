@@ -113,7 +113,7 @@ module DataManager
 		}
         SignOut():void
 		{
-
+		
 		}
         Read(_sKey:string):string //帶入key值以求得對應的資料
 		{

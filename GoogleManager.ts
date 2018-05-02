@@ -96,28 +96,28 @@ module DataManager
 					// 	var fs = require("fs");
 					// 	// do something with fooModule
 					// })
-					let fileMetadata = {
-						'name': 'config.json',
-  						'parents': ['appDataFolder']
-					};
-					let media = {
-						mimeType: 'application/json',
-						body: fs.createReadStream('files/config.json')
-					};
-					this.drive.files.create({
-						resource: fileMetadata,
-						media: media,
-						fields: 'id'
-					}, (err, file) =>{
-						if (err) 
-						{
-							// Handle error
-							console.error(err);
-						} else 
-						{
-							console.log('Folder Id:', file.id);
-						}
-					});
+					// let fileMetadata = {
+					// 	'name': 'config.json',
+  					// 	'parents': ['appDataFolder']
+					// };
+					// let media = {
+					// 	mimeType: 'application/json',
+					// 	body: fs.createReadStream('files/config.json')
+					// };
+					// this.drive.files.create({
+					// 	resource: fileMetadata,
+					// 	media: media,
+					// 	fields: 'id'
+					// }, (err, file) =>{
+					// 	if (err) 
+					// 	{
+					// 		// Handle error
+					// 		console.error(err);
+					// 	} else 
+					// 	{
+					// 		console.log('Folder Id:', file.id);
+					// 	}
+					// });
 				}
 			});
 		}

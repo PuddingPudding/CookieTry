@@ -31,7 +31,7 @@ class CookieTry
             
             console.log("CookieTryGoInTo");
             this.m_cookieManager = new CookieManager();
-            // this.m_googleManager = new GoogleManager();
+            this.m_googleManager = new GoogleManager();
             this.m_facebookManager = new FacebookManager();
             this.m_facebookRepost = new FacebookManager();
 

@@ -15,22 +15,6 @@ module DataManager
 	{		
 		constructor()
 		{
-			// window.fbAsyncInit = ()=> {
-			// 	FB.init({
-			// 	appId            : 'your-app-id',
-			// 	autoLogAppEvents : true,
-			// 	xfbml            : true,
-			// 	version          : 'v2.12'
-			// 	});
-			// };
-
-			// (function(d, s, id){
-			// 	var js, fjs = d.getElementsByTagName(s)[0];
-			// 	if (d.getElementById(id)) {return;}
-			// 	js = d.createElement(s); js.id = id;
-			// 	js.src = "https://connect.facebook.net/en_US/sdk.js";
-			// 	fjs.parentNode.insertBefore(js, fjs);
-			// }(document, 'script', 'facebook-jssdk'));
 			window.fbAsyncInit = ()=>{
 				FB.init({
 					appId: "1048113598669819", // App ID
@@ -133,8 +117,8 @@ module DataManager
 			FB.ui({
 				method: 'share',
 				mobile_iframe: true,
-				href: _url,
-				quote:"肥宅打quote" //分享時會額外多加文字，這行文字使用者只能決定要不要留，無法編輯
+				href: _url
+				// quote:"肥宅打quote" //分享時會額外多加文字，這行文字使用者只能決定要不要留，無法編輯
 			}, function (response) { });
 		}
 	}
